@@ -1,0 +1,12 @@
+<shapes>
+  <triangle>
+    <color>red</color>
+    <side1>1,5</side1>
+    <side2>1,5</side2>
+    <side3>1,5</side3>
+  </triangle>
+  <circle>
+    <color>orange</color>
+    <diameter>1,5</diameter>
+  </circle>
+</shapes>
