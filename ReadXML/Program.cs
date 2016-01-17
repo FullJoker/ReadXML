@@ -10,56 +10,40 @@ using System.Xml.Schema;
 
 namespace ReadXML
 {
-    public class Program
+    public class Program 
     {
-        static void Main(string[] args)
+        public static string getOneTagByName(XmlElement element, string tagName)
         {
-            XmlDocument xDoc = new XmlDocument();
-            xDoc.Load("shapes.xml");
-            // получим корневой элемент
-            XmlElement xRoot = xDoc.DocumentElement;
-            // обход всех узлов в корневом элементе
-            XmlNodeList nodeLst = xDoc.GetElementsByTagName("circle");
-            XmlNodeList nodeLst2 = xDoc.GetElementsByTagName("triangle");
-            XmlNodeList nodesOfShapes = xDoc.GetElementsByTagName("shapes").Item(0).ChildNodes;
+            return element.GetElementsByTagName(tagName).Item(0).InnerText;
+        }
 
-            for (int i = 0; i < nodeLst.Count; i++)
+        public static string buildOutputShape(string name, string color, double area, int number)
+        {
+            return "#" + number + " " + name + ":" + color + " - " + string.Format("{0:0.##}", area);
+        }
+
+        public static void Main(string[] args)
+        {
+            XmlDocument fXml = new XmlDocument();
+            fXml.Load("shapes.xml");
+            try
             {
-                XmlNode fstNode = nodeLst.Item(i);
-                if (fstNode.NodeType == XmlNodeType.Element)
+                XmlNodeList nodesOfShapes = fXml.GetElementsByTagName("shapes").Item(0).ChildNodes;
+                StringBuilder outputBuilder = new StringBuilder();
+                int count = 1;
+                foreach (XmlNode node in nodesOfShapes)
                 {
-                    XmlElement elj = (XmlElement)fstNode;
-                    XmlNodeList nljx = elj.GetElementsByTagName("color");
-                    XmlElement eljx = (XmlElement)nljx.Item(0);
-                    XmlNodeList nljy = elj.GetElementsByTagName("diameter");
-                    XmlElement eljy = (XmlElement)nljy.Item(0);
-                    Console.WriteLine("Описания фигуры: {0}", eljx.InnerText);
-                    double radius = Double.Parse(eljy.InnerText) / 2;
-                    double area = Math.Pow(radius, 2) * Math.PI;
-                    Console.WriteLine(string.Format("Площадь: {0:0.##}", area));
+                    if (node.NodeType == XmlNodeType.Element)
+                    {
+                        string shapeOutput = Shape.buildShape(node, count++);
+                        outputBuilder.Append(shapeOutput).Append('\n');
+                    }
                 }
+                System.Console.WriteLine(outputBuilder.ToString());
             }
-            for (int i = 0; i < nodeLst2.Count; i++)
+            catch (Exception e)
             {
-                XmlNode fstNode2 = nodeLst2.Item(i);
-                if (fstNode2.NodeType == XmlNodeType.Element)
-                {
-                    XmlElement elj = (XmlElement)fstNode2;
-                    XmlNodeList nljx = elj.GetElementsByTagName("color");
-                    XmlElement eljx = (XmlElement)nljx.Item(0);
-                    XmlNodeList nljy = elj.GetElementsByTagName("side1");
-                    XmlElement eljy = (XmlElement)nljy.Item(0);
-                    XmlNodeList nljz = elj.GetElementsByTagName("side2");
-                    XmlElement eljz = (XmlElement)nljz.Item(0);
-                    XmlNodeList nlje = elj.GetElementsByTagName("side3");
-                    XmlElement elje = (XmlElement)nlje.Item(0);
-                    Console.WriteLine("Описания фигуры: {0}", eljx.InnerText);
-                    double y = (Double.Parse(eljy.InnerText));
-                    double z = (Double.Parse(eljz.InnerText));
-                    double e = (Double.Parse(elje.InnerText));
-                    double p = (y + z + e) / 2;
-                    Console.WriteLine(string.Format("Площадь: {0:0.##}", p));
-                }
+                Console.WriteLine(e.Message);
             }
             Console.Read();
         }
