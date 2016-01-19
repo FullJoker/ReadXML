@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
 using System.Xml;
-using System.Xml.Schema;
-
 
 namespace ReadXML
 {
@@ -24,28 +17,9 @@ namespace ReadXML
 
         public static void Main(string[] args)
         {
-            XmlDocument fXml = new XmlDocument();
-            fXml.Load("shapes.xml");
-            try
-            {
-                XmlNodeList nodesOfShapes = fXml.GetElementsByTagName("shapes").Item(0).ChildNodes;
-                StringBuilder outputBuilder = new StringBuilder();
-                int count = 1;
-                foreach (XmlNode node in nodesOfShapes)
-                {
-                    if (node.NodeType == XmlNodeType.Element)
-                    {
-                        string shapeOutput = Shape.buildShape(node, count++);
-                        outputBuilder.Append(shapeOutput).Append('\n');
-                    }
-                }
-                System.Console.WriteLine(outputBuilder.ToString());
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            Console.Read();
+            Read showOfFigure = new Read();
+            Console.WriteLine(showOfFigure.XmlRead());
+            Console.ReadKey();
         }
     }
 }
