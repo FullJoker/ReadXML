@@ -1,16 +1,18 @@
-﻿using System.Xml;
+﻿using System;
+using System.Xml;
 
 namespace ReadXML
 {
-    class Shape
+    abstract class Shape
     {
         public string nodeName;
         public string color;
+        public string diameterRaw;
         public double area;
-        public virtual string buildShape(XmlNode node, int number)
-        {
-            return Program.buildOutputShape(nodeName, color, area, number);
-        }
+        public static string TRIANGLE_SHAPE_NAME = "triangle";
+        public static string CIRCLE_SHAPE_NAME = "circle";
+
+        public abstract string BuildShape(XmlNode node, int number);
 
     }
 }

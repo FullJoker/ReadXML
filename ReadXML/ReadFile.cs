@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace ReadXML
 {
-    class Read
+    class ReadFile
     {
         public string XmlRead()
         {
@@ -12,23 +12,23 @@ namespace ReadXML
             XmlDocument fXml = new XmlDocument();
             fXml.Load("shapes.xml");
             StringBuilder outputBuilder = new StringBuilder();
-            XmlNodeList nodeLst = fXml.GetElementsByTagName("circle");
-            XmlNodeList nodeLst2 = fXml.GetElementsByTagName("triangle");
+            XmlNodeList nodeList = fXml.GetElementsByTagName("circle");
+            XmlNodeList nodeList2 = fXml.GetElementsByTagName("triangle");
             int count = 1;
-            foreach (XmlNode node in nodeLst)
+            foreach (XmlNode node in nodeList)
             {
                 if (node.NodeType == XmlNodeType.Element)
                 {
-                    string shapeOutput = figureOfCircle.buildShape(node, count++);
+                    string shapeOutput = figureOfCircle.BuildShape(node, count++);
                     outputBuilder.Append(shapeOutput).Append('\n');
                 }
 
             }
-            foreach (XmlNode node in nodeLst2)
+            foreach (XmlNode node in nodeList2)
             {
                 if (node.NodeType == XmlNodeType.Element)
                 {
-                    string shapeOutput2 = figureOfTriangle.buildShape(node, count++);
+                    string shapeOutput2 = figureOfTriangle.BuildShape(node, count++);
                     outputBuilder.Append(shapeOutput2).Append('\n');
                 }
             }
