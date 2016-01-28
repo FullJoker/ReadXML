@@ -3,32 +3,27 @@ using System.Xml;
 
 namespace ReadXML
 {
-    class ReadFile
+    class FileRead
     {
-        public string XmlRead()
-        {
+        public string ReadXml()
+        {    
             Circle figureOfCircle = new Circle();
             Triangle figureOfTriangle = new Triangle();
             XmlDocument fXml = new XmlDocument();
             fXml.Load("shapes.xml");
             StringBuilder outputBuilder = new StringBuilder();
-            XmlNodeList nodeList = fXml.GetElementsByTagName("circle");
-            XmlNodeList nodeList2 = fXml.GetElementsByTagName("triangle");
+            XmlNodeList nodeList = fXml.GetElementsByTagName("shapes").Item(0).ChildNodes;
             int count = 1;
             foreach (XmlNode node in nodeList)
             {
-                if (node.NodeType == XmlNodeType.Element)
+                if (node.Name == "circle")
                 {
-                    string shapeOutput = figureOfCircle.BuildShape(node, count++);
+                    string shapeOutput = figureOfCircle.CalculateSquare(node, count++);
                     outputBuilder.Append(shapeOutput).Append('\n');
                 }
-
-            }
-            foreach (XmlNode node in nodeList2)
-            {
-                if (node.NodeType == XmlNodeType.Element)
+                else if (node.Name == "triangle")
                 {
-                    string shapeOutput2 = figureOfTriangle.BuildShape(node, count++);
+                    string shapeOutput2 = figureOfTriangle.CalculateSquare(node, count++);
                     outputBuilder.Append(shapeOutput2).Append('\n');
                 }
             }
