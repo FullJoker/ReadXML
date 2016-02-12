@@ -6,10 +6,11 @@ namespace ReadXML
     {
         public static void Main(string[] args)
         {
-            ILoadFile view = new FileReader();
-            var nameFile = "shapes.xml";
-            view.LoadXmlFile(nameFile);
-            Console.ReadKey();
+            ILoadFile view = new FileReader();//TODO: Again
+            var nameFile = "shapes.xml";      //AND AGAIN
+            view.LoadXmlFile(nameFile);	      //AND AGAIN
+            Console.ReadKey();		      //RENAME THIS!!!
         }
     }
 }
+//oh, look! Boobs! (.Y.)

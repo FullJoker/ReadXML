@@ -2,7 +2,7 @@
 
 namespace ReadXML.Figures
 {
-    class Triangle : Shape
+    class Triangle : Shape//watch Shape.cs
     {
         protected double SideA { get; set; }
         protected double SideB { get; set; }

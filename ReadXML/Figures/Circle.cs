@@ -2,7 +2,7 @@
 
 namespace ReadXML.Figures
 {
-    class Circle : Shape
+    class Circle : Shape//Watch Shape.cs
     {
         protected double Diameter { get; set; }
         public Circle(int id, string name, string color, double diameter): base(id,name,color)
