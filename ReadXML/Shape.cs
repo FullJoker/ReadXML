@@ -1,14 +1,22 @@
-﻿using System;
-using System.Xml;
-
+﻿
 namespace ReadXML
 {
     abstract class Shape
     {
-        protected string color;
-        protected double area;
+        protected int Id { get; set; }  
+        protected string Name { get; set; }
+        protected string Color { get; set; }
 
-        public abstract string CalculateSquare(XmlNode node, int number);
-
+        protected Shape(int id, string name, string color)
+        {
+            Id = id;
+            Name = name;
+            Color = color;
+        }
+        public abstract double CalculateSquare();
+        public override string ToString()
+        {
+            return Id + ")" + Name + ":" + Color + " = " + string.Format("{0:F2}", CalculateSquare()); 
+        }
     }
 }
